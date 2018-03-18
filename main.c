@@ -1,14 +1,14 @@
 #include <stdio.h>
 
 typedef struct _pixel {
-    unsigned short int r;
-    unsigned short int g;
-    unsigned short int b;
+    unsigned short int red;
+    unsigned short int green;
+    unsigned short int blue;
 } Pixel;
 
 typedef struct _image {
     // [width][height][rgb]
-    // 0 -> r
+    // 0 -> red
     // 1 -> g
     // 2 -> b
     unsigned short int pixel[512][512][3];
@@ -24,9 +24,9 @@ int max(int a, int b) {
 }
 
 int pixel_igual(Pixel p1, Pixel p2) {
-    if (p1.r == p2.r &&
-        p1.g == p2.g &&
-        p1.b == p2.b)
+    if (p1.red == p2.red &&
+        p1.green == p2.green &&
+        p1.blue == p2.blue)
         return 1;
     return 0;
 }
@@ -63,20 +63,20 @@ void blur(unsigned int h, unsigned short int pixel[512][512][3], int T, unsigned
             int min_w = (w - 1 > j + T/2) ? j + T/2 : w - 1;
             for(int x = (0 > i - T/2 ? 0 : i - T/2); x <= menor_h; ++x) {
                 for(int y = (0 > j - T/2 ? 0 : j - T/2); y <= min_w; ++y) {
-                    media.r += pixel[x][y][0];
-                    media.g += pixel[x][y][1];
-                    media.b += pixel[x][y][2];
+                    media.red += pixel[x][y][0];
+                    media.green += pixel[x][y][1];
+                    media.blue += pixel[x][y][2];
                 }
             }
 
             // printf("%u", media.r)
-            media.r /= T * T;
-            media.g /= T * T;
-            media.b /= T * T;
+            media.red /= T * T;
+            media.green /= T * T;
+            media.blue /= T * T;
 
-            pixel[i][j][0] = media.r;
-            pixel[i][j][1] = media.g;
-            pixel[i][j][2] = media.b;
+            pixel[i][j][0] = media.red;
+            pixel[i][j][1] = media.green;
+            pixel[i][j][2] = media.blue;
         }
     }
 }
@@ -216,17 +216,17 @@ int main() {
                         else x = img.h - 1 - i2;
 
                         Pixel aux1;
-                        aux1.r = img.pixel[i2][j][0];
-                        aux1.g = img.pixel[i2][j][1];
-                        aux1.b = img.pixel[i2][j][2];
+                        aux1.red = img.pixel[i2][j][0];
+                        aux1.green = img.pixel[i2][j][1];
+                        aux1.blue = img.pixel[i2][j][2];
 
                         img.pixel[i2][j][0] = img.pixel[x][y][0];
                         img.pixel[i2][j][1] = img.pixel[x][y][1];
                         img.pixel[i2][j][2] = img.pixel[x][y][2];
 
-                        img.pixel[x][y][0] = aux1.r;
-                        img.pixel[x][y][1] = aux1.g;
-                        img.pixel[x][y][2] = aux1.b;
+                        img.pixel[x][y][0] = aux1.red;
+                        img.pixel[x][y][1] = aux1.green;
+                        img.pixel[x][y][2] = aux1.blue;
                     }
                 }
                 break;
