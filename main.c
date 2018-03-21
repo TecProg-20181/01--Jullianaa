@@ -33,12 +33,7 @@ int pixel_igual(Pixel p1, Pixel p2) {
 
 
 Image escala_de_cinza(Image img) {
-    /*for (unsigned int i = 0; i < img.height; ++i) {o
-        for (unsigned int j = 0; j < img.width; ++j) {
-            print("%u", img.pixel[i][j][0] + img.pixel[i][j][1] + img.pixel[i][j][2]);
-        }
-    }*/
-
+    
     for (unsigned int i = 0; i < img.height; ++i) {
         for (unsigned int j = 0; j < img.height; ++j) {
             int media = img.pixel[i][j][0] +
