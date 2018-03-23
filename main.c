@@ -1,8 +1,9 @@
 /*
     Universidade de Brasília
-    Code modified for:
-        Name: Julliana do Couto Almeida
-        Email: julliana.coutoalmeida@gmail.com
+    Name: Julliana do Couto Almeida
+    Email: julliana.coutoalmeida@gmail.com
+
+    Função do software: aplicar filtros em imagens
 */
 
 #include <stdio.h>
@@ -23,6 +24,10 @@ typedef struct _image {
     unsigned int height;
 } Image;
 
+int min(int measure, int T){
+    int i;
+    int smaller = (measure - 1 > i + T/2) ? i + T/2 : measure - 1;
+}
 
 int max(int a, int b) {
     if (a > b)
@@ -61,8 +66,8 @@ void blur(unsigned int height, unsigned short int pixel[512][512][3], int T, uns
         for (unsigned int j = 0; j < width; ++j) {
             Pixel media = {0, 0, 0};
 
-            int smaller_height = (height - 1 > i + T/2) ? i + T/2 : height - 1;
-            int min_width = (width - 1 > j + T/2) ? j + T/2 : width - 1;
+            int smaller_height = min(height,T);
+            int min_width = min(width,T);
             for(int x = (0 > i - T/2 ? 0 : i - T/2); x <= smaller_height; ++x) {
                 for(int y = (0 > j - T/2 ? 0 : j - T/2); y <= min_width; ++y) {
                     media.red += pixel[x][y][0];
@@ -171,16 +176,16 @@ int main() {
                         pixel[2] = img.pixel[x][j][2];
 
                         int p =  pixel[0] * .393 + pixel[1] * .769 + pixel[2] * .189;
-                        int menor_r = (255 >  p) ? p : 255;
-                        img.pixel[x][j][0] = menor_r;
+                        int smaller_r = (255 >  p) ? p : 255;
+                        img.pixel[x][j][0] = smaller_r;
 
                         p =  pixel[0] * .349 + pixel[1] * .686 + pixel[2] * .168;
-                        menor_r = (255 >  p) ? p : 255;
-                        img.pixel[x][j][1] = menor_r;
+                        smaller_r = (255 >  p) ? p : 255;
+                        img.pixel[x][j][1] = smaller_r;
 
                         p =  pixel[0] * .272 + pixel[1] * .534 + pixel[2] * .131;
-                        menor_r = (255 >  p) ? p : 255;
-                        img.pixel[x][j][2] = menor_r;
+                        smaller_r = (255 >  p) ? p : 255;
+                        img.pixel[x][j][2] = smaller_r;
                     }
                 }
 
