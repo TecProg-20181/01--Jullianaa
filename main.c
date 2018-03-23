@@ -35,6 +35,7 @@ int max(int a, int b) {
     return b;
 }
 
+/*
 int pixel_igual(Pixel p1, Pixel p2) {
     if (p1.red == p2.red &&
         p1.green == p2.green &&
@@ -42,7 +43,7 @@ int pixel_igual(Pixel p1, Pixel p2) {
         return 1;
     return 0;
 }
-
+*/
 
 Image gray_scale(Image img) {
     
